@@ -1,0 +1,1057 @@
+------- FILE 2048.asm LEVEL 1 PASS 2
+      1  0a2a ????						; https://github.com/DenisParyshev/Apple1_2048/blob/main/2048.asm
+      2  0a2a ????				      PROCESSOR	6502
+      3  0280					      ORG	$280
+      4  0280
+      5  0280		       4c 12 0a 	      jmp	start
+      6  0283
+      7  0283				   N0
+      8  0283		       20		      BYTE.b	$20
+      9  0284		       20		      BYTE.b	$20
+     10  0285		       20		      BYTE.b	$20
+     11  0286		       20		      BYTE.b	$20
+     12  0287				   N1
+     13  0287		       20		      BYTE.b	$20
+     14  0288		       20		      BYTE.b	$20
+     15  0289		       20		      BYTE.b	$20
+     16  028a		       32		      BYTE.b	$32
+     17  028b				   N2
+     18  028b		       20		      BYTE.b	$20
+     19  028c		       20		      BYTE.b	$20
+     20  028d		       20		      BYTE.b	$20
+     21  028e		       34		      BYTE.b	$34
+     22  028f				   N3
+     23  028f		       20		      BYTE.b	$20
+     24  0290		       20		      BYTE.b	$20
+     25  0291		       20		      BYTE.b	$20
+     26  0292		       38		      BYTE.b	$38
+     27  0293				   N4
+     28  0293		       20		      BYTE.b	$20
+     29  0294		       20		      BYTE.b	$20
+     30  0295		       31		      BYTE.b	$31
+     31  0296		       36		      BYTE.b	$36
+     32  0297				   N5
+     33  0297		       20		      BYTE.b	$20
+     34  0298		       20		      BYTE.b	$20
+     35  0299		       33		      BYTE.b	$33
+     36  029a		       32		      BYTE.b	$32
+     37  029b				   N6
+     38  029b		       20		      BYTE.b	$20
+     39  029c		       20		      BYTE.b	$20
+     40  029d		       36		      BYTE.b	$36
+     41  029e		       34		      BYTE.b	$34
+     42  029f				   N7
+     43  029f		       20		      BYTE.b	$20
+     44  02a0		       31		      BYTE.b	$31
+     45  02a1		       32		      BYTE.b	$32
+     46  02a2		       38		      BYTE.b	$38
+     47  02a3				   N8
+     48  02a3		       20		      BYTE.b	$20
+     49  02a4		       32		      BYTE.b	$32
+     50  02a5		       35		      BYTE.b	$35
+     51  02a6		       36		      BYTE.b	$36
+     52  02a7				   N9
+     53  02a7		       20		      BYTE.b	$20
+     54  02a8		       35		      BYTE.b	$35
+     55  02a9		       31		      BYTE.b	$31
+     56  02aa		       32		      BYTE.b	$32
+     57  02ab				   N10
+     58  02ab		       31		      BYTE.b	$31
+     59  02ac		       30		      BYTE.b	$30
+     60  02ad		       32		      BYTE.b	$32
+     61  02ae		       34		      BYTE.b	$34
+     62  02af				   N11
+     63  02af		       32		      BYTE.b	$32
+     64  02b0		       30		      BYTE.b	$30
+     65  02b1		       34		      BYTE.b	$34
+     66  02b2		       38		      BYTE.b	$38
+     67  02b3
+     68  02b3				   A11
+     69  02b3		       01		      BYTE.b	1
+     70  02b4				   A12
+     71  02b4		       01		      BYTE.b	1
+     72  02b5				   A13
+     73  02b5		       00		      BYTE.b	0
+     74  02b6				   A14
+     75  02b6		       01		      BYTE.b	1
+     76  02b7				   A21
+     77  02b7		       02		      BYTE.b	2
+     78  02b8				   A22
+     79  02b8		       02		      BYTE.b	2
+     80  02b9				   A23
+     81  02b9		       02		      BYTE.b	2
+     82  02ba				   A24
+     83  02ba		       02		      BYTE.b	2
+     84  02bb				   A31
+     85  02bb		       03		      BYTE.b	3
+     86  02bc				   A32
+     87  02bc		       03		      BYTE.b	3
+     88  02bd				   A33
+     89  02bd		       03		      BYTE.b	3
+     90  02be				   A34
+     91  02be		       03		      BYTE.b	3
+     92  02bf				   A41
+     93  02bf		       04		      BYTE.b	4
+     94  02c0				   A42
+     95  02c0		       04		      BYTE.b	4
+     96  02c1				   A43
+     97  02c1		       0a		      BYTE.b	10
+     98  02c2				   A44
+     99  02c2		       0a		      BYTE.b	10
+    100  02c3
+    101  02c3				   longLine
+    102  02c3		       2b		      BYTE.b	$2B
+    103  02c4		       2d		      BYTE.b	$2D
+    104  02c5		       2d		      BYTE.b	$2D
+    105  02c6		       2d		      BYTE.b	$2D
+    106  02c7		       2d		      BYTE.b	$2D
+    107  02c8		       2d		      BYTE.b	$2D
+    108  02c9		       2d		      BYTE.b	$2D
+    109  02ca		       2b		      BYTE.b	$2B
+    110  02cb		       2d		      BYTE.b	$2D
+    111  02cc		       2d		      BYTE.b	$2D
+    112  02cd		       2d		      BYTE.b	$2D
+    113  02ce		       2d		      BYTE.b	$2D
+    114  02cf		       2d		      BYTE.b	$2D
+    115  02d0		       2d		      BYTE.b	$2D
+    116  02d1		       2b		      BYTE.b	$2B
+    117  02d2		       2d		      BYTE.b	$2D
+    118  02d3		       2d		      BYTE.b	$2D
+    119  02d4		       2d		      BYTE.b	$2D
+    120  02d5		       2d		      BYTE.b	$2D
+    121  02d6		       2d		      BYTE.b	$2D
+    122  02d7		       2d		      BYTE.b	$2D
+    123  02d8		       2b		      BYTE.b	$2B
+    124  02d9		       2d		      BYTE.b	$2D
+    125  02da		       2d		      BYTE.b	$2D
+    126  02db		       2d		      BYTE.b	$2D
+    127  02dc		       2d		      BYTE.b	$2D
+    128  02dd		       2d		      BYTE.b	$2D
+    129  02de		       2d		      BYTE.b	$2D
+    130  02df		       2b		      BYTE.b	$2B
+    131  02e0		       8d		      BYTE.b	$8D
+    132  02e1
+    133  02e1				   g0mes
+    134  02e1		       47		      BYTE.b	$47
+    135  02e2		       41		      BYTE.b	$41
+    136  02e3		       4d		      BYTE.b	$4D
+    137  02e4		       45		      BYTE.b	$45
+    138  02e5		       20		      BYTE.b	$20
+    139  02e6		       4f		      BYTE.b	$4F
+    140  02e7		       56		      BYTE.b	$56
+    141  02e8		       45		      BYTE.b	$45
+    142  02e9		       52		      BYTE.b	$52
+    143  02ea
+    144  02ea				   w1mes
+    145  02ea		       59		      BYTE.b	$59
+    146  02eb		       4f		      BYTE.b	$4F
+    147  02ec		       55		      BYTE.b	$55
+    148  02ed		       20		      BYTE.b	$20
+    149  02ee		       57		      BYTE.b	$57
+    150  02ef		       49		      BYTE.b	$49
+    151  02f0		       4e		      BYTE.b	$4E
+    152  02f1
+    153  02f1				   logo
+    154  02f1		       32		      BYTE.b	$32
+    155  02f2		       30		      BYTE.b	$30
+    156  02f3		       34		      BYTE.b	$34
+    157  02f4		       38		      BYTE.b	$38
+    158  02f5		       8d		      BYTE.b	$8D
+    159  02f6		       8d		      BYTE.b	$8D
+    160  02f7		       57		      BYTE.b	$57
+    161  02f8		       2d		      BYTE.b	$2D
+    162  02f9		       55		      BYTE.b	$55
+    163  02fa		       50		      BYTE.b	$50
+    164  02fb		       8d		      BYTE.b	$8D
+    165  02fc		       41		      BYTE.b	$41
+    166  02fd		       2d		      BYTE.b	$2D
+    167  02fe		       4c		      BYTE.b	$4C
+    168  02ff		       45		      BYTE.b	$45
+    169  0300		       46		      BYTE.b	$46
+    170  0301		       54		      BYTE.b	$54
+    171  0302		       8d		      BYTE.b	$8D
+    172  0303		       44		      BYTE.b	$44
+    173  0304		       2d		      BYTE.b	$2D
+    174  0305		       52		      BYTE.b	$52
+    175  0306		       49		      BYTE.b	$49
+    176  0307		       47		      BYTE.b	$47
+    177  0308		       48		      BYTE.b	$48
+    178  0309		       54		      BYTE.b	$54
+    179  030a		       8d		      BYTE.b	$8D
+    180  030b		       53		      BYTE.b	$53
+    181  030c		       2d		      BYTE.b	$2D
+    182  030d		       44		      BYTE.b	$44
+    183  030e		       4f		      BYTE.b	$4F
+    184  030f		       57		      BYTE.b	$57
+    185  0310		       4e		      BYTE.b	$4E
+    186  0311		       8d		      BYTE.b	$8D
+    187  0312		       8d		      BYTE.b	$8D
+    188  0313		       43		      BYTE.b	$43
+    189  0314		       4f		      BYTE.b	$4F
+    190  0315		       44		      BYTE.b	$44
+    191  0316		       45		      BYTE.b	$45
+    192  0317		       3a		      BYTE.b	$3A
+    193  0318		       20		      BYTE.b	$20
+    194  0319		       44		      BYTE.b	$44
+    195  031a		       45		      BYTE.b	$45
+    196  031b		       4e		      BYTE.b	$4E
+    197  031c		       49		      BYTE.b	$49
+    198  031d		       53		      BYTE.b	$53
+    199  031e		       20		      BYTE.b	$20
+    200  031f		       50		      BYTE.b	$50
+    201  0320		       41		      BYTE.b	$41
+    202  0321		       52		      BYTE.b	$52
+    203  0322		       59		      BYTE.b	$59
+    204  0323		       53		      BYTE.b	$53
+    205  0324		       48		      BYTE.b	$48
+    206  0325		       45		      BYTE.b	$45
+    207  0326		       56		      BYTE.b	$56
+    208  0327		       8d		      BYTE.b	$8D
+    209  0328							;special thanks
+    210  0328		       53		      BYTE.b	$53
+    211  0329		       50		      BYTE.b	$50
+    212  032a		       45		      BYTE.b	$45
+    213  032b		       43		      BYTE.b	$43
+    214  032c		       49		      BYTE.b	$49
+    215  032d		       41		      BYTE.b	$41
+    216  032e		       4c		      BYTE.b	$4C
+    217  032f		       20		      BYTE.b	$20
+    218  0330		       54		      BYTE.b	$54
+    219  0331		       48		      BYTE.b	$48
+    220  0332		       41		      BYTE.b	$41
+    221  0333		       4e		      BYTE.b	$4E
+    222  0334		       4b		      BYTE.b	$4B
+    223  0335		       53		      BYTE.b	$53
+    224  0336		       20		      BYTE.b	$20
+    225  0337		       54		      BYTE.b	$54
+    226  0338		       4f		      BYTE.b	$4F
+    227  0339		       8d		      BYTE.b	$8D
+    228  033a		       49		      BYTE.b	$49
+    229  033b		       47		      BYTE.b	$47
+    230  033c		       4f		      BYTE.b	$4F
+    231  033d		       52		      BYTE.b	$52
+    232  033e		       20		      BYTE.b	$20
+    233  033f		       4d		      BYTE.b	$4D
+    234  0340		       55		      BYTE.b	$55
+    235  0341		       4b		      BYTE.b	$4B
+    236  0342		       48		      BYTE.b	$48
+    237  0343		       41		      BYTE.b	$41
+    238  0344		       4e		      BYTE.b	$4E
+    239  0345		       4f		      BYTE.b	$4F
+    240  0346		       56		      BYTE.b	$56
+    241  0347		       20		      BYTE.b	$20
+    242  0348		       41		      BYTE.b	$41
+    243  0349		       4e		      BYTE.b	$4E
+    244  034a		       44		      BYTE.b	$44
+    245  034b		       20		      BYTE.b	$20
+    246  034c		       43		      BYTE.b	$43
+    247  034d		       4c		      BYTE.b	$4C
+    248  034e		       41		      BYTE.b	$41
+    249  034f		       55		      BYTE.b	$55
+    250  0350		       44		      BYTE.b	$44
+    251  0351		       49		      BYTE.b	$49
+    252  0352		       4f		      BYTE.b	$4F
+    253  0353		       20		      BYTE.b	$20
+    254  0354		       50		      BYTE.b	$50
+    255  0355		       41		      BYTE.b	$41
+    256  0356		       52		      BYTE.b	$52
+    257  0357		       4d		      BYTE.b	$4D
+    258  0358		       49		      BYTE.b	$49
+    259  0359		       47		      BYTE.b	$47
+    260  035a		       49		      BYTE.b	$49
+    261  035b		       41		      BYTE.b	$41
+    262  035c		       4e		      BYTE.b	$4E
+    263  035d		       49		      BYTE.b	$49
+    264  035e		       8d		      BYTE.b	$8D
+    265  035f		       46		      BYTE.b	$46
+    266  0360		       4f		      BYTE.b	$4F
+    267  0361		       52		      BYTE.b	$52
+    268  0362		       20		      BYTE.b	$20
+    269  0363		       54		      BYTE.b	$54
+    270  0364		       45		      BYTE.b	$45
+    271  0365		       53		      BYTE.b	$53
+    272  0366		       54		      BYTE.b	$54
+    273  0367		       49		      BYTE.b	$49
+    274  0368		       4e		      BYTE.b	$4E
+    275  0369		       47		      BYTE.b	$47
+    276  036a		       20		      BYTE.b	$20
+    277  036b		       41		      BYTE.b	$41
+    278  036c		       4e		      BYTE.b	$4E
+    279  036d		       44		      BYTE.b	$44
+    280  036e		       20		      BYTE.b	$20
+    281  036f		       49		      BYTE.b	$49
+    282  0370		       4d		      BYTE.b	$4D
+    283  0371		       50		      BYTE.b	$50
+    284  0372		       52		      BYTE.b	$52
+    285  0373		       4f		      BYTE.b	$4F
+    286  0374		       56		      BYTE.b	$56
+    287  0375		       49		      BYTE.b	$49
+    288  0376		       4e		      BYTE.b	$4E
+    289  0377		       47		      BYTE.b	$47
+    290  0378		       20		      BYTE.b	$20
+    291  0379		       54		      BYTE.b	$54
+    292  037a		       48		      BYTE.b	$48
+    293  037b		       45		      BYTE.b	$45
+    294  037c		       20		      BYTE.b	$20
+    295  037d		       47		      BYTE.b	$47
+    296  037e		       41		      BYTE.b	$41
+    297  037f		       4d		      BYTE.b	$4D
+    298  0380		       45		      BYTE.b	$45
+    299  0381		       21		      BYTE.b	$21
+    300  0382		       8d		      BYTE.b	$8D
+    301  0383							;press any key
+    302  0383				   pressakey
+    303  0383		       8d		      BYTE.b	$8D
+    304  0384		       50		      BYTE.b	$50
+    305  0385		       52		      BYTE.b	$52
+    306  0386		       45		      BYTE.b	$45
+    307  0387		       53		      BYTE.b	$53
+    308  0388		       53		      BYTE.b	$53
+    309  0389		       20		      BYTE.b	$20
+    310  038a		       41		      BYTE.b	$41
+    311  038b		       4e		      BYTE.b	$4E
+    312  038c		       59		      BYTE.b	$59
+    313  038d		       20		      BYTE.b	$20
+    314  038e		       4b		      BYTE.b	$4B
+    315  038f		       45		      BYTE.b	$45
+    316  0390		       59		      BYTE.b	$59
+    317  0391
+    318  0391				   lastKey
+    319  0391		       00		      BYTE.b	$0
+    320  0392
+    321  0392				   clrsrc
+    322  0392		       a2 00		      ldx	#$0
+    323  0394		       a9 8d		      lda	#$8D
+    324  0396				   clrnxtln
+    325  0396		       e8		      inx
+    326  0397		       20 ef ff 	      jsr	$FFEF
+    327  039a		       e0 24		      cpx	#$24
+    328  039c		       f0 03		      beq	doneclr
+    329  039e		       4c 96 03 	      jmp	clrnxtln
+    330  03a1				   doneclr
+    331  03a1		       60		      rts
+    332  03a2
+    333  03a2				   putplus
+    334  03a2		       a9 2b		      lda	#$2B
+    335  03a4		       20 ef ff 	      jsr	$FFEF
+    336  03a7		       a9 20		      lda	#$20
+    337  03a9		       20 ef ff 	      jsr	$FFEF
+    338  03ac		       60		      rts
+    339  03ad
+    340  03ad				   put8D
+    341  03ad		       a9 8d		      lda	#$8D
+    342  03af		       20 ef ff 	      jsr	$FFEF
+    343  03b2		       60		      rts
+    344  03b3
+    345  03b3				   prnnum
+    346  03b3		       0a		      asl
+    347  03b4		       2a		      rol
+    348  03b5		       a8		      tay
+    349  03b6		       a9 00		      lda	#$0
+    350  03b8		       79 83 02 	      adc	N0,y
+    351  03bb		       20 ef ff 	      jsr	$FFEF
+    352  03be		       c8		      iny
+    353  03bf		       a9 00		      lda	#$0
+    354  03c1		       79 83 02 	      adc	N0,y
+    355  03c4		       20 ef ff 	      jsr	$FFEF
+    356  03c7		       c8		      iny
+    357  03c8		       a9 00		      lda	#$0
+    358  03ca		       79 83 02 	      adc	N0,y
+    359  03cd		       20 ef ff 	      jsr	$FFEF
+    360  03d0		       c8		      iny
+    361  03d1		       a9 00		      lda	#$0
+    362  03d3		       79 83 02 	      adc	N0,y
+    363  03d6		       20 ef ff 	      jsr	$FFEF
+    364  03d9		       a9 20		      lda	#$20
+    365  03db		       20 ef ff 	      jsr	$FFEF
+    366  03de		       20 a2 03 	      jsr	putplus
+    367  03e1		       60		      rts
+    368  03e2
+    369  03e2				   lline
+    370  03e2		       20 ad 03 	      jsr	put8D
+    371  03e5		       a2 00		      ldx	#0
+    372  03e7				   nxtchar
+    373  03e7		       bd c3 02 	      lda	longLine,x
+    374  03ea		       20 ef ff 	      jsr	$FFEF
+    375  03ed		       e8		      inx
+    376  03ee		       e0 1e		      cpx	#$1E
+    377  03f0		       f0 03		      beq	linedone
+    378  03f2		       4c e7 03 	      jmp	nxtchar
+    379  03f5				   linedone
+    380  03f5		       60		      rts
+    381  03f6
+    382  03f6				   print
+    383  03f6		       20 60 09 	      jsr	showscore
+    384  03f9		       20 e2 03 	      jsr	lline
+    385  03fc		       20 a2 03 	      jsr	putplus
+    386  03ff		       ad b3 02 	      lda	A11
+    387  0402		       20 b3 03 	      jsr	prnnum
+    388  0405		       ad b4 02 	      lda	A12
+    389  0408		       20 b3 03 	      jsr	prnnum
+    390  040b		       ad b5 02 	      lda	A13
+    391  040e		       20 b3 03 	      jsr	prnnum
+    392  0411		       ad b6 02 	      lda	A14
+    393  0414		       20 b3 03 	      jsr	prnnum
+    394  0417		       20 e2 03 	      jsr	lline
+    395  041a		       20 a2 03 	      jsr	putplus
+    396  041d		       ad b7 02 	      lda	A21
+    397  0420		       20 b3 03 	      jsr	prnnum
+    398  0423		       ad b8 02 	      lda	A22
+    399  0426		       20 b3 03 	      jsr	prnnum
+    400  0429		       ad b9 02 	      lda	A23
+    401  042c		       20 b3 03 	      jsr	prnnum
+    402  042f		       ad ba 02 	      lda	A24
+    403  0432		       20 b3 03 	      jsr	prnnum
+    404  0435		       20 e2 03 	      jsr	lline
+    405  0438		       20 a2 03 	      jsr	putplus
+    406  043b		       ad bb 02 	      lda	A31
+    407  043e		       20 b3 03 	      jsr	prnnum
+    408  0441		       ad bc 02 	      lda	A32
+    409  0444		       20 b3 03 	      jsr	prnnum
+    410  0447		       ad bd 02 	      lda	A33
+    411  044a		       20 b3 03 	      jsr	prnnum
+    412  044d		       ad be 02 	      lda	A34
+    413  0450		       20 b3 03 	      jsr	prnnum
+    414  0453		       20 e2 03 	      jsr	lline
+    415  0456		       20 a2 03 	      jsr	putplus
+    416  0459		       ad bf 02 	      lda	A41
+    417  045c		       20 b3 03 	      jsr	prnnum
+    418  045f		       ad c0 02 	      lda	A42
+    419  0462		       20 b3 03 	      jsr	prnnum
+    420  0465		       ad c1 02 	      lda	A43
+    421  0468		       20 b3 03 	      jsr	prnnum
+    422  046b		       ad c2 02 	      lda	A44
+    423  046e		       20 b3 03 	      jsr	prnnum
+    424  0471		       20 e2 03 	      jsr	lline
+    425  0474		       60		      rts
+    426  0475
+    427  0475				   startscreen
+    428  0475		       a2 00		      ldx	#0
+    429  0477				   snchr
+    430  0477		       bd f1 02 	      lda	logo,x
+    431  047a		       20 ef ff 	      jsr	$FFEF
+    432  047d		       e8		      inx
+    433  047e		       e0 a0		      cpx	#$A0
+    434  0480		       f0 03		      beq	snchrdone
+    435  0482		       4c 77 04 	      jmp	snchr
+    436  0485				   snchrdone
+    437  0485		       ad 11 d0 	      lda	$D011
+    438  0488		       10 fb		      bpl	snchrdone
+    439  048a		       ad 10 d0 	      lda	$D010
+    440  048d		       8d 91 03 	      sta	lastKey
+    441  0490		       60		      rts
+    442  0491
+    443  0491				   gameover
+    444  0491		       20 f6 03 	      jsr	print
+    445  0494		       20 ad 03 	      jsr	put8D
+    446  0497		       a2 00		      ldx	#$0
+    447  0499				   gnxt1
+    448  0499		       bd e1 02 	      lda	g0mes,x
+    449  049c		       20 ef ff 	      jsr	$FFEF
+    450  049f		       e8		      inx
+    451  04a0		       e0 09		      cpx	#$9
+    452  04a2		       f0 03		      beq	gdn1
+    453  04a4		       4c 99 04 	      jmp	gnxt1
+    454  04a7				   gdn1
+    455  04a7		       a2 00		      ldx	#$0
+    456  04a9				   gnxt2
+    457  04a9		       bd 83 03 	      lda	pressakey,x
+    458  04ac		       20 ef ff 	      jsr	$FFEF
+    459  04af		       e8		      inx
+    460  04b0		       e0 0e		      cpx	#$0E
+    461  04b2		       f0 03		      beq	gdn2
+    462  04b4		       4c a9 04 	      jmp	gnxt2
+    463  04b7				   gdn2
+    464  04b7		       ad 11 d0 	      lda	$D011
+    465  04ba		       10 fb		      bpl	gdn2
+    466  04bc		       ad 10 d0 	      lda	$D010
+    467  04bf		       4c 12 0a 	      jmp	start
+    468  04c2
+    469  04c2				   putrand
+    470  04c2		       a0 00		      ldy	#$0
+    471  04c4		       ad 91 03 	      lda	lastKey
+    472  04c7		       29 0f		      and	#$0F
+    473  04c9		       aa		      tax
+    474  04ca				   trynextpos
+    475  04ca		       c8		      iny
+    476  04cb		       c0 11		      cpy	#$11
+    477  04cd		       f0 c2		      beq	gameover
+    478  04cf		       bd b3 02 	      lda	A11,x
+    479  04d2		       c9 00		      cmp	#$0
+    480  04d4		       f0 0a		      beq	prnddone
+    481  04d6		       e8		      inx
+    482  04d7		       e0 10		      cpx	#$10
+    483  04d9		       d0 ef		      bne	trynextpos
+    484  04db		       a2 00		      ldx	#$0
+    485  04dd		       4c ca 04 	      jmp	trynextpos
+    486  04e0				   prnddone
+    487  04e0		       a9 01		      lda	#$1
+    488  04e2		       9d b3 02 	      sta	A11,x
+    489  04e5		       8e 91 03 	      stx	lastKey
+    490  04e8		       60		      rts
+    491  04e9
+    492  04e9				   init
+    493  04e9		       a2 00		      ldx	#$0
+    494  04eb		       a9 00		      lda	#$0
+    495  04ed				   init1
+    496  04ed		       9d b3 02 	      sta	A11,x
+    497  04f0		       e8		      inx
+    498  04f1		       e0 10		      cpx	#$10
+    499  04f3		       d0 f8		      bne	init1
+    500  04f5		       a9 01		      lda	#$1
+    501  04f7		       8d b3 02 	      sta	A11
+    502  04fa		       60		      rts
+    503  04fb
+    504  04fb				   field
+    505  04fb				   fld0
+    506  04fb		       00		      BYTE.b	0
+    507  04fc				   fld1
+    508  04fc		       00		      BYTE.b	0
+    509  04fd				   fld2
+    510  04fd		       00		      BYTE.b	0
+    511  04fe				   fld3
+    512  04fe		       00		      BYTE.b	0
+    513  04ff				   from
+    514  04ff		       00		      BYTE.b	0
+    515  0500				   to
+    516  0500		       00		      BYTE.b	0
+    517  0501
+    518  0501				   shiftOne
+    519  0501		       ae 00 05 	      ldx	to
+    520  0504		       bd fb 04 	      lda	field,x
+    521  0507		       c9 00		      cmp	#$0
+    522  0509		       d0 14		      bne	s1
+    523  050b		       ae ff 04 	      ldx	from
+    524  050e		       bd fb 04 	      lda	field,x
+    525  0511		       ae 00 05 	      ldx	to
+    526  0514		       9d fb 04 	      sta	field,x
+    527  0517		       a9 00		      lda	#$0
+    528  0519		       ae ff 04 	      ldx	from
+    529  051c		       9d fb 04 	      sta	field,x
+    530  051f				   s1
+    531  051f		       60		      rts
+    532  0520
+    533  0520				   shift
+    534  0520		       a9 03		      lda	#$3
+    535  0522		       8d 00 05 	      sta	to
+    536  0525		       a9 02		      lda	#$2
+    537  0527		       8d ff 04 	      sta	from
+    538  052a		       20 01 05 	      jsr	shiftOne
+    539  052d		       a9 02		      lda	#$2
+    540  052f		       8d 00 05 	      sta	to
+    541  0532		       a9 01		      lda	#$1
+    542  0534		       8d ff 04 	      sta	from
+    543  0537		       20 01 05 	      jsr	shiftOne
+    544  053a		       a9 01		      lda	#$1
+    545  053c		       8d 00 05 	      sta	to
+    546  053f		       a9 00		      lda	#$0
+    547  0541		       8d ff 04 	      sta	from
+    548  0544		       20 01 05 	      jsr	shiftOne
+    549  0547		       a9 03		      lda	#$3
+    550  0549		       8d 00 05 	      sta	to
+    551  054c		       a9 02		      lda	#$2
+    552  054e		       8d ff 04 	      sta	from
+    553  0551		       20 01 05 	      jsr	shiftOne
+    554  0554		       a9 02		      lda	#$2
+    555  0556		       8d 00 05 	      sta	to
+    556  0559		       a9 01		      lda	#$1
+    557  055b		       8d ff 04 	      sta	from
+    558  055e		       20 01 05 	      jsr	shiftOne
+    559  0561		       a9 03		      lda	#$3
+    560  0563		       8d 00 05 	      sta	to
+    561  0566		       a9 02		      lda	#$2
+    562  0568		       8d ff 04 	      sta	from
+    563  056b		       20 01 05 	      jsr	shiftOne
+    564  056e		       60		      rts
+    565  056f
+    566  056f				   youwin
+    567  056f		       20 ad 03 	      jsr	put8D
+    568  0572		       a2 00		      ldx	#$0
+    569  0574				   wnxt1
+    570  0574		       bd ea 02 	      lda	w1mes,x
+    571  0577		       20 ef ff 	      jsr	$FFEF
+    572  057a		       e8		      inx
+    573  057b		       e0 07		      cpx	#$7
+    574  057d		       f0 03		      beq	wnn1
+    575  057f		       4c 74 05 	      jmp	wnxt1
+    576  0582				   wnn1
+    577  0582		       a2 00		      ldx	#$0
+    578  0584				   wnxt2
+    579  0584		       bd 83 03 	      lda	pressakey,x
+    580  0587		       20 ef ff 	      jsr	$FFEF
+    581  058a		       e8		      inx
+    582  058b		       e0 0e		      cpx	#$0E
+    583  058d		       f0 03		      beq	wnnx2
+    584  058f		       4c 84 05 	      jmp	wnxt2
+    585  0592				   wnnx2
+    586  0592		       ad 11 d0 	      lda	$D011
+    587  0595		       10 fb		      bpl	wnnx2
+    588  0597		       ad 10 d0 	      lda	$D010
+    589  059a		       4c 12 0a 	      jmp	start
+    590  059d
+    591  059d				   sumOne
+    592  059d		       ae ff 04 	      ldx	from
+    593  05a0		       bd fb 04 	      lda	field,x
+    594  05a3		       c9 00		      cmp	#0
+    595  05a5		       f0 1d		      beq	s2
+    596  05a7		       ae 00 05 	      ldx	to
+    597  05aa		       dd fb 04 	      cmp	field,x
+    598  05ad		       d0 15		      bne	s2
+    599  05af		       a8		      tay
+    600  05b0		       c8		      iny
+    601  05b1		       98		      tya
+    602  05b2		       ae 00 05 	      ldx	to
+    603  05b5		       9d fb 04 	      sta	field,x
+    604  05b8		       c9 0b		      cmp	#$0B
+    605  05ba		       f0 b3		      beq	youwin
+    606  05bc		       a9 00		      lda	#0
+    607  05be		       ae ff 04 	      ldx	from
+    608  05c1		       9d fb 04 	      sta	field,x
+    609  05c4				   s2
+    610  05c4		       60		      rts
+    611  05c5
+    612  05c5				   sum
+    613  05c5		       a9 02		      lda	#$2
+    614  05c7		       8d ff 04 	      sta	from
+    615  05ca		       a9 03		      lda	#$3
+    616  05cc		       8d 00 05 	      sta	to
+    617  05cf		       20 9d 05 	      jsr	sumOne
+    618  05d2		       a9 01		      lda	#$1
+    619  05d4		       8d ff 04 	      sta	from
+    620  05d7		       a9 02		      lda	#$2
+    621  05d9		       8d 00 05 	      sta	to
+    622  05dc		       20 9d 05 	      jsr	sumOne
+    623  05df		       a9 00		      lda	#$0
+    624  05e1		       8d ff 04 	      sta	from
+    625  05e4		       a9 01		      lda	#$1
+    626  05e6		       8d 00 05 	      sta	to
+    627  05e9		       20 9d 05 	      jsr	sumOne
+    628  05ec		       60		      rts
+    629  05ed
+    630  05ed				   getmove
+    631  05ed		       20 20 05 	      jsr	shift
+    632  05f0		       20 c5 05 	      jsr	sum
+    633  05f3		       20 20 05 	      jsr	shift
+    634  05f6		       60		      rts
+    635  05f7
+    636  05f7				   upKey
+    637  05f7		       ad b3 02 	      lda	A11
+    638  05fa		       8d fe 04 	      sta	fld3
+    639  05fd		       ad b7 02 	      lda	A21
+    640  0600		       8d fd 04 	      sta	fld2
+    641  0603		       ad bb 02 	      lda	A31
+    642  0606		       8d fc 04 	      sta	fld1
+    643  0609		       ad bf 02 	      lda	A41
+    644  060c		       8d fb 04 	      sta	fld0
+    645  060f		       20 ed 05 	      jsr	getmove
+    646  0612		       ad fb 04 	      lda	fld0
+    647  0615		       8d bf 02 	      sta	A41
+    648  0618		       ad fc 04 	      lda	fld1
+    649  061b		       8d bb 02 	      sta	A31
+    650  061e		       ad fd 04 	      lda	fld2
+    651  0621		       8d b7 02 	      sta	A21
+    652  0624		       ad fe 04 	      lda	fld3
+    653  0627		       8d b3 02 	      sta	A11
+    654  062a		       ad b4 02 	      lda	A12
+    655  062d		       8d fe 04 	      sta	fld3
+    656  0630		       ad b8 02 	      lda	A22
+    657  0633		       8d fd 04 	      sta	fld2
+    658  0636		       ad bc 02 	      lda	A32
+    659  0639		       8d fc 04 	      sta	fld1
+    660  063c		       ad c0 02 	      lda	A42
+    661  063f		       8d fb 04 	      sta	fld0
+    662  0642		       20 ed 05 	      jsr	getmove
+    663  0645		       ad fb 04 	      lda	fld0
+    664  0648		       8d c0 02 	      sta	A42
+    665  064b		       ad fc 04 	      lda	fld1
+    666  064e		       8d bc 02 	      sta	A32
+    667  0651		       ad fd 04 	      lda	fld2
+    668  0654		       8d b8 02 	      sta	A22
+    669  0657		       ad fe 04 	      lda	fld3
+    670  065a		       8d b4 02 	      sta	A12
+    671  065d		       ad b5 02 	      lda	A13
+    672  0660		       8d fe 04 	      sta	fld3
+    673  0663		       ad b9 02 	      lda	A23
+    674  0666		       8d fd 04 	      sta	fld2
+    675  0669		       ad bd 02 	      lda	A33
+    676  066c		       8d fc 04 	      sta	fld1
+    677  066f		       ad c1 02 	      lda	A43
+    678  0672		       8d fb 04 	      sta	fld0
+    679  0675		       20 ed 05 	      jsr	getmove
+    680  0678		       ad fb 04 	      lda	fld0
+    681  067b		       8d c1 02 	      sta	A43
+    682  067e		       ad fc 04 	      lda	fld1
+    683  0681		       8d bd 02 	      sta	A33
+    684  0684		       ad fd 04 	      lda	fld2
+    685  0687		       8d b9 02 	      sta	A23
+    686  068a		       ad fe 04 	      lda	fld3
+    687  068d		       8d b5 02 	      sta	A13
+    688  0690		       ad b6 02 	      lda	A14
+    689  0693		       8d fe 04 	      sta	fld3
+    690  0696		       ad ba 02 	      lda	A24
+    691  0699		       8d fd 04 	      sta	fld2
+    692  069c		       ad be 02 	      lda	A34
+    693  069f		       8d fc 04 	      sta	fld1
+    694  06a2		       ad c2 02 	      lda	A44
+    695  06a5		       8d fb 04 	      sta	fld0
+    696  06a8		       20 ed 05 	      jsr	getmove
+    697  06ab		       ad fb 04 	      lda	fld0
+    698  06ae		       8d c2 02 	      sta	A44
+    699  06b1		       ad fc 04 	      lda	fld1
+    700  06b4		       8d be 02 	      sta	A34
+    701  06b7		       ad fd 04 	      lda	fld2
+    702  06ba		       8d ba 02 	      sta	A24
+    703  06bd		       ad fe 04 	      lda	fld3
+    704  06c0		       8d b6 02 	      sta	A14
+    705  06c3		       60		      rts
+    706  06c4
+    707  06c4				   downKey
+    708  06c4		       ad b3 02 	      lda	A11
+    709  06c7		       8d fb 04 	      sta	fld0
+    710  06ca		       ad b7 02 	      lda	A21
+    711  06cd		       8d fc 04 	      sta	fld1
+    712  06d0		       ad bb 02 	      lda	A31
+    713  06d3		       8d fd 04 	      sta	fld2
+    714  06d6		       ad bf 02 	      lda	A41
+    715  06d9		       8d fe 04 	      sta	fld3
+    716  06dc		       20 ed 05 	      jsr	getmove
+    717  06df		       ad fe 04 	      lda	fld3
+    718  06e2		       8d bf 02 	      sta	A41
+    719  06e5		       ad fd 04 	      lda	fld2
+    720  06e8		       8d bb 02 	      sta	A31
+    721  06eb		       ad fc 04 	      lda	fld1
+    722  06ee		       8d b7 02 	      sta	A21
+    723  06f1		       ad fb 04 	      lda	fld0
+    724  06f4		       8d b3 02 	      sta	A11
+    725  06f7		       ad b4 02 	      lda	A12
+    726  06fa		       8d fb 04 	      sta	fld0
+    727  06fd		       ad b8 02 	      lda	A22
+    728  0700		       8d fc 04 	      sta	fld1
+    729  0703		       ad bc 02 	      lda	A32
+    730  0706		       8d fd 04 	      sta	fld2
+    731  0709		       ad c0 02 	      lda	A42
+    732  070c		       8d fe 04 	      sta	fld3
+    733  070f		       20 ed 05 	      jsr	getmove
+    734  0712		       ad fe 04 	      lda	fld3
+    735  0715		       8d c0 02 	      sta	A42
+    736  0718		       ad fd 04 	      lda	fld2
+    737  071b		       8d bc 02 	      sta	A32
+    738  071e		       ad fc 04 	      lda	fld1
+    739  0721		       8d b8 02 	      sta	A22
+    740  0724		       ad fb 04 	      lda	fld0
+    741  0727		       8d b4 02 	      sta	A12
+    742  072a		       ad b5 02 	      lda	A13
+    743  072d		       8d fb 04 	      sta	fld0
+    744  0730		       ad b9 02 	      lda	A23
+    745  0733		       8d fc 04 	      sta	fld1
+    746  0736		       ad bd 02 	      lda	A33
+    747  0739		       8d fd 04 	      sta	fld2
+    748  073c		       ad c1 02 	      lda	A43
+    749  073f		       8d fe 04 	      sta	fld3
+    750  0742		       20 ed 05 	      jsr	getmove
+    751  0745		       ad fe 04 	      lda	fld3
+    752  0748		       8d c1 02 	      sta	A43
+    753  074b		       ad fd 04 	      lda	fld2
+    754  074e		       8d bd 02 	      sta	A33
+    755  0751		       ad fc 04 	      lda	fld1
+    756  0754		       8d b9 02 	      sta	A23
+    757  0757		       ad fb 04 	      lda	fld0
+    758  075a		       8d b5 02 	      sta	A13
+    759  075d		       ad b6 02 	      lda	A14
+    760  0760		       8d fb 04 	      sta	fld0
+    761  0763		       ad ba 02 	      lda	A24
+    762  0766		       8d fc 04 	      sta	fld1
+    763  0769		       ad be 02 	      lda	A34
+    764  076c		       8d fd 04 	      sta	fld2
+    765  076f		       ad c2 02 	      lda	A44
+    766  0772		       8d fe 04 	      sta	fld3
+    767  0775		       20 ed 05 	      jsr	getmove
+    768  0778		       ad fe 04 	      lda	fld3
+    769  077b		       8d c2 02 	      sta	A44
+    770  077e		       ad fd 04 	      lda	fld2
+    771  0781		       8d be 02 	      sta	A34
+    772  0784		       ad fc 04 	      lda	fld1
+    773  0787		       8d ba 02 	      sta	A24
+    774  078a		       ad fb 04 	      lda	fld0
+    775  078d		       8d b6 02 	      sta	A14
+    776  0790		       60		      rts
+    777  0791
+    778  0791				   leftKey
+    779  0791		       ad b6 02 	      lda	A14
+    780  0794		       8d fb 04 	      sta	fld0
+    781  0797		       ad b5 02 	      lda	A13
+    782  079a		       8d fc 04 	      sta	fld1
+    783  079d		       ad b4 02 	      lda	A12
+    784  07a0		       8d fd 04 	      sta	fld2
+    785  07a3		       ad b3 02 	      lda	A11
+    786  07a6		       8d fe 04 	      sta	fld3
+    787  07a9		       20 ed 05 	      jsr	getmove
+    788  07ac		       ad fe 04 	      lda	fld3
+    789  07af		       8d b3 02 	      sta	A11
+    790  07b2		       ad fd 04 	      lda	fld2
+    791  07b5		       8d b4 02 	      sta	A12
+    792  07b8		       ad fc 04 	      lda	fld1
+    793  07bb		       8d b5 02 	      sta	A13
+    794  07be		       ad fb 04 	      lda	fld0
+    795  07c1		       8d b6 02 	      sta	A14
+    796  07c4		       ad ba 02 	      lda	A24
+    797  07c7		       8d fb 04 	      sta	fld0
+    798  07ca		       ad b9 02 	      lda	A23
+    799  07cd		       8d fc 04 	      sta	fld1
+    800  07d0		       ad b8 02 	      lda	A22
+    801  07d3		       8d fd 04 	      sta	fld2
+    802  07d6		       ad b7 02 	      lda	A21
+    803  07d9		       8d fe 04 	      sta	fld3
+    804  07dc		       20 ed 05 	      jsr	getmove
+    805  07df		       ad fe 04 	      lda	fld3
+    806  07e2		       8d b7 02 	      sta	A21
+    807  07e5		       ad fd 04 	      lda	fld2
+    808  07e8		       8d b8 02 	      sta	A22
+    809  07eb		       ad fc 04 	      lda	fld1
+    810  07ee		       8d b9 02 	      sta	A23
+    811  07f1		       ad fb 04 	      lda	fld0
+    812  07f4		       8d ba 02 	      sta	A24
+    813  07f7		       ad be 02 	      lda	A34
+    814  07fa		       8d fb 04 	      sta	fld0
+    815  07fd		       ad bd 02 	      lda	A33
+    816  0800		       8d fc 04 	      sta	fld1
+    817  0803		       ad bc 02 	      lda	A32
+    818  0806		       8d fd 04 	      sta	fld2
+    819  0809		       ad bb 02 	      lda	A31
+    820  080c		       8d fe 04 	      sta	fld3
+    821  080f		       20 ed 05 	      jsr	getmove
+    822  0812		       ad fe 04 	      lda	fld3
+    823  0815		       8d bb 02 	      sta	A31
+    824  0818		       ad fd 04 	      lda	fld2
+    825  081b		       8d bc 02 	      sta	A32
+    826  081e		       ad fc 04 	      lda	fld1
+    827  0821		       8d bd 02 	      sta	A33
+    828  0824		       ad fb 04 	      lda	fld0
+    829  0827		       8d be 02 	      sta	A34
+    830  082a		       ad c2 02 	      lda	A44
+    831  082d		       8d fb 04 	      sta	fld0
+    832  0830		       ad c1 02 	      lda	A43
+    833  0833		       8d fc 04 	      sta	fld1
+    834  0836		       ad c0 02 	      lda	A42
+    835  0839		       8d fd 04 	      sta	fld2
+    836  083c		       ad bf 02 	      lda	A41
+    837  083f		       8d fe 04 	      sta	fld3
+    838  0842		       20 ed 05 	      jsr	getmove
+    839  0845		       ad fe 04 	      lda	fld3
+    840  0848		       8d bf 02 	      sta	A41
+    841  084b		       ad fd 04 	      lda	fld2
+    842  084e		       8d c0 02 	      sta	A42
+    843  0851		       ad fc 04 	      lda	fld1
+    844  0854		       8d c1 02 	      sta	A43
+    845  0857		       ad fb 04 	      lda	fld0
+    846  085a		       8d c2 02 	      sta	A44
+    847  085d		       60		      rts
+    848  085e
+    849  085e				   rightKey
+    850  085e		       ad b6 02 	      lda	A14
+    851  0861		       8d fe 04 	      sta	fld3
+    852  0864		       ad b5 02 	      lda	A13
+    853  0867		       8d fd 04 	      sta	fld2
+    854  086a		       ad b4 02 	      lda	A12
+    855  086d		       8d fc 04 	      sta	fld1
+    856  0870		       ad b3 02 	      lda	A11
+    857  0873		       8d fb 04 	      sta	fld0
+    858  0876		       20 ed 05 	      jsr	getmove
+    859  0879		       ad fb 04 	      lda	fld0
+    860  087c		       8d b3 02 	      sta	A11
+    861  087f		       ad fc 04 	      lda	fld1
+    862  0882		       8d b4 02 	      sta	A12
+    863  0885		       ad fd 04 	      lda	fld2
+    864  0888		       8d b5 02 	      sta	A13
+    865  088b		       ad fe 04 	      lda	fld3
+    866  088e		       8d b6 02 	      sta	A14
+    867  0891		       ad ba 02 	      lda	A24
+    868  0894		       8d fe 04 	      sta	fld3
+    869  0897		       ad b9 02 	      lda	A23
+    870  089a		       8d fd 04 	      sta	fld2
+    871  089d		       ad b8 02 	      lda	A22
+    872  08a0		       8d fc 04 	      sta	fld1
+    873  08a3		       ad b7 02 	      lda	A21
+    874  08a6		       8d fb 04 	      sta	fld0
+    875  08a9		       20 ed 05 	      jsr	getmove
+    876  08ac		       ad fb 04 	      lda	fld0
+    877  08af		       8d b7 02 	      sta	A21
+    878  08b2		       ad fc 04 	      lda	fld1
+    879  08b5		       8d b8 02 	      sta	A22
+    880  08b8		       ad fd 04 	      lda	fld2
+    881  08bb		       8d b9 02 	      sta	A23
+    882  08be		       ad fe 04 	      lda	fld3
+    883  08c1		       8d ba 02 	      sta	A24
+    884  08c4		       ad be 02 	      lda	A34
+    885  08c7		       8d fe 04 	      sta	fld3
+    886  08ca		       ad bd 02 	      lda	A33
+    887  08cd		       8d fd 04 	      sta	fld2
+    888  08d0		       ad bc 02 	      lda	A32
+    889  08d3		       8d fc 04 	      sta	fld1
+    890  08d6		       ad bb 02 	      lda	A31
+    891  08d9		       8d fb 04 	      sta	fld0
+    892  08dc		       20 ed 05 	      jsr	getmove
+    893  08df		       ad fb 04 	      lda	fld0
+    894  08e2		       8d bb 02 	      sta	A31
+    895  08e5		       ad fc 04 	      lda	fld1
+    896  08e8		       8d bc 02 	      sta	A32
+    897  08eb		       ad fd 04 	      lda	fld2
+    898  08ee		       8d bd 02 	      sta	A33
+    899  08f1		       ad fe 04 	      lda	fld3
+    900  08f4		       8d be 02 	      sta	A34
+    901  08f7		       ad c2 02 	      lda	A44
+    902  08fa		       8d fe 04 	      sta	fld3
+    903  08fd		       ad c1 02 	      lda	A43
+    904  0900		       8d fd 04 	      sta	fld2
+    905  0903		       ad c0 02 	      lda	A42
+    906  0906		       8d fc 04 	      sta	fld1
+    907  0909		       ad bf 02 	      lda	A41
+    908  090c		       8d fb 04 	      sta	fld0
+    909  090f		       20 ed 05 	      jsr	getmove
+    910  0912		       ad fb 04 	      lda	fld0
+    911  0915		       8d bf 02 	      sta	A41
+    912  0918		       ad fc 04 	      lda	fld1
+    913  091b		       8d c0 02 	      sta	A42
+    914  091e		       ad fd 04 	      lda	fld2
+    915  0921		       8d c1 02 	      sta	A43
+    916  0924		       ad fe 04 	      lda	fld3
+    917  0927		       8d c2 02 	      sta	A44
+    918  092a		       60		      rts
+    919  092b
+    920  092b				   getkey
+    921  092b		       ad 11 d0 	      lda	$D011
+    922  092e		       10 fb		      bpl	getkey
+    923  0930		       ad 10 d0 	      lda	$D010
+    924  0933		       8d 91 03 	      sta	lastKey
+    925  0936		       c9 d7		      cmp	#$D7
+    926  0938		       d0 04		      bne	oth1
+    927  093a		       20 f7 05 	      jsr	upKey
+    928  093d		       60		      rts
+    929  093e				   oth1
+    930  093e		       c9 d3		      cmp	#$D3
+    931  0940		       d0 04		      bne	oth2
+    932  0942		       20 c4 06 	      jsr	downKey
+    933  0945		       60		      rts
+    934  0946				   oth2
+    935  0946		       c9 c1		      cmp	#$C1
+    936  0948		       d0 04		      bne	oth3
+    937  094a		       20 91 07 	      jsr	leftKey
+    938  094d		       60		      rts
+    939  094e				   oth3
+    940  094e		       c9 c4		      cmp	#$C4
+    941  0950		       d0 04		      bne	oth4
+    942  0952		       20 5e 08 	      jsr	rightKey
+    943  0955		       60		      rts
+    944  0956				   oth4
+    945  0956		       4c 2b 09 	      jmp	getkey
+    946  0959
+    947  0959				   scoremes
+    948  0959		       53		      BYTE.b	$53
+    949  095a		       43		      BYTE.b	$43
+    950  095b		       4f		      BYTE.b	$4F
+    951  095c		       52		      BYTE.b	$52
+    952  095d		       45		      BYTE.b	$45
+    953  095e		       3a		      BYTE.b	$3A
+    954  095f		       20		      BYTE.b	$20
+    955  0960
+    956  0960				   showscore
+    957  0960		       a2 00		      ldx	#0
+    958  0962				   nxtscorechar
+    959  0962		       bd 59 09 	      lda	scoremes,x
+    960  0965		       20 ef ff 	      jsr	$FFEF
+    961  0968		       e8		      inx
+    962  0969		       e0 06		      cpx	#$6
+    963  096b		       f0 03		      beq	scoredone
+    964  096d		       4c 62 09 	      jmp	nxtscorechar
+    965  0970				   scoredone
+    966  0970		       ad b3 02 	      lda	A11
+    967  0973		       cd b4 02 	      cmp	A12
+    968  0976		       b0 03		      bcs	na13
+    969  0978		       ad b4 02 	      lda	A12
+    970  097b				   na13
+    971  097b		       cd b5 02 	      cmp	A13
+    972  097e		       b0 03		      bcs	na14
+    973  0980		       ad b5 02 	      lda	A13
+    974  0983				   na14
+    975  0983		       cd b6 02 	      cmp	A14
+    976  0986		       b0 03		      bcs	na21
+    977  0988		       ad b6 02 	      lda	A14
+    978  098b				   na21
+    979  098b		       cd b7 02 	      cmp	A21
+    980  098e		       b0 03		      bcs	na22
+    981  0990		       ad b7 02 	      lda	A21
+    982  0993				   na22
+    983  0993		       cd b8 02 	      cmp	A22
+    984  0996		       b0 03		      bcs	na23
+    985  0998		       ad b8 02 	      lda	A22
+    986  099b				   na23
+    987  099b		       cd b9 02 	      cmp	A23
+    988  099e		       b0 03		      bcs	na24
+    989  09a0		       ad b9 02 	      lda	A23
+    990  09a3				   na24
+    991  09a3		       cd ba 02 	      cmp	A24
+    992  09a6		       b0 03		      bcs	na31
+    993  09a8		       ad ba 02 	      lda	A24
+    994  09ab				   na31
+    995  09ab		       cd bb 02 	      cmp	A31
+    996  09ae		       b0 03		      bcs	na32
+    997  09b0		       ad bb 02 	      lda	A31
+    998  09b3				   na32
+    999  09b3		       cd bc 02 	      cmp	A32
+   1000  09b6		       b0 03		      bcs	na33
+   1001  09b8		       ad bc 02 	      lda	A32
+   1002  09bb				   na33
+   1003  09bb		       cd bd 02 	      cmp	A33
+   1004  09be		       b0 03		      bcs	na34
+   1005  09c0		       ad bd 02 	      lda	A33
+   1006  09c3				   na34
+   1007  09c3		       cd be 02 	      cmp	A34
+   1008  09c6		       b0 03		      bcs	na41
+   1009  09c8		       ad be 02 	      lda	A34
+   1010  09cb				   na41
+   1011  09cb		       cd bf 02 	      cmp	A41
+   1012  09ce		       b0 03		      bcs	na42
+   1013  09d0		       ad bf 02 	      lda	A41
+   1014  09d3				   na42
+   1015  09d3		       cd c0 02 	      cmp	A42
+   1016  09d6		       b0 03		      bcs	na43
+   1017  09d8		       ad c0 02 	      lda	A42
+   1018  09db				   na43
+   1019  09db		       cd c1 02 	      cmp	A43
+   1020  09de		       b0 03		      bcs	na44
+   1021  09e0		       ad c1 02 	      lda	A43
+   1022  09e3				   na44
+   1023  09e3		       cd c2 02 	      cmp	A44
+   1024  09e6		       b0 03		      bcs	na50
+   1025  09e8		       ad c2 02 	      lda	A44
+   1026  09eb				   na50
+   1027  09eb		       0a		      asl
+   1028  09ec		       2a		      rol
+   1029  09ed		       a8		      tay
+   1030  09ee		       a9 00		      lda	#$0
+   1031  09f0		       79 83 02 	      adc	N0,y
+   1032  09f3		       20 ef ff 	      jsr	$FFEF
+   1033  09f6		       c8		      iny
+   1034  09f7		       a9 00		      lda	#$0
+   1035  09f9		       79 83 02 	      adc	N0,y
+   1036  09fc		       20 ef ff 	      jsr	$FFEF
+   1037  09ff		       c8		      iny
+   1038  0a00		       a9 00		      lda	#$0
+   1039  0a02		       79 83 02 	      adc	N0,y
+   1040  0a05		       20 ef ff 	      jsr	$FFEF
+   1041  0a08		       c8		      iny
+   1042  0a09		       a9 00		      lda	#$0
+   1043  0a0b		       79 83 02 	      adc	N0,y
+   1044  0a0e		       20 ef ff 	      jsr	$FFEF
+   1045  0a11		       60		      rts
+   1046  0a12
+   1047  0a12				   start
+   1048  0a12		       20 e9 04 	      jsr	init
+   1049  0a15		       20 92 03 	      jsr	clrsrc
+   1050  0a18		       20 75 04 	      jsr	startscreen
+   1051  0a1b				   mainloop
+   1052  0a1b		       20 92 03 	      jsr	clrsrc
+   1053  0a1e		       20 c2 04 	      jsr	putrand
+   1054  0a21		       20 f6 03 	      jsr	print
+   1055  0a24		       20 2b 09 	      jsr	getkey
+   1056  0a27		       4c 1b 0a 	      jmp	mainloop

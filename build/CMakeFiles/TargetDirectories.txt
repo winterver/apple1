@@ -1,0 +1,4 @@
+C:/Users/I/apple1/build/CMakeFiles/apple1.dir
+C:/Users/I/apple1/build/CMakeFiles/winter.dir
+C:/Users/I/apple1/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/I/apple1/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,5 @@
+------- FILE integer_basic.asm LEVEL 1 PASS 1
+      1  0000					      PROCESSOR	6502
+      2  e000					      ORG	0xE000
+      3  e000							;/* Intergrated BASIC.hex 由方向音痴原子氧提供。*
+      4  e000					      INCBIN	"./bin/Integrated BASIC.hex"

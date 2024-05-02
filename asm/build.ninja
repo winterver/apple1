@@ -1,0 +1,14 @@
+AS = dasm
+
+rule as
+    command = $AS $in -o$out -l$out.lst -f2 -S
+    # When option -f2 is enabled, dasm replaces every ORG
+    # directive with two uint16's. The first indicates
+    # into which the following binary should be loaded,
+    # and the second the length of the binary.
+
+build winteros.o65: as winteros.asm
+build integer_basic.o65: as integer_basic.asm
+build apple1basic.o65: as apple1basic.asm
+build cell.o65: as cell.asm
+build 2048.o65: as 2048.asm

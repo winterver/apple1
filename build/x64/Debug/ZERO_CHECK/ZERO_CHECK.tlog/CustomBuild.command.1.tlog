@@ -1,0 +1,10 @@
+^C:\USERS\I\APPLE1\BUILD\CMAKEFILES\312E2EF8A4B346388116928D3464191C\GENERATE.STAMP.RULE
+setlocal
+D:\Application\CMake\bin\cmake.exe -SC:/Users/I/apple1 -BC:/Users/I/apple1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/I/apple1/build/apple1.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
