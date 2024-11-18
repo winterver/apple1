@@ -12,6 +12,7 @@
 #include <io.h>
 #else
 #include <termios.h>
+#include <signal.h>
 #endif
 
 extern "C" {
@@ -79,13 +80,31 @@ public:
         SetConsoleMode(h, mode);
         setmode(0, O_BINARY);
 #else
-#error "Linux version to be implemented"
+        static struct termios old;
+        tcgetattr(0, &old);
+
+        struct termios neo = old;
+        neo.c_lflag &= ~ECHO;
+        neo.c_lflag &= ~ICANON;
+        tcsetattr(0, TCSANOW, &neo);
+
+        auto restore = [](int) {
+            tcsetattr(0, TCSANOW, &old);
+            _exit(0); // exit() doesn't work here, use _exit()
+        };
+        signal(SIGINT, restore);
+        signal(SIGTERM, restore);
+        signal(SIGSEGV, restore);
 #endif
 
         std::thread([this](){
             while(true)
             {
                 uint8_t byte = getchar();
+#ifndef _WIN32
+                if (byte == 10)
+                    byte = 0x0D;
+#endif
                 byte = toupper(byte) | 0x80;
                 keys.push_back(byte);
             }
@@ -162,9 +181,13 @@ private:
             byte &= 0x7f;
             byte = toupper(byte);
             putchar(byte == '\r' ? '\n' : byte);
+#ifndef _WIN32
+            fflush(stdout);
+#endif
             // no break
         default:
-            mem[addr] = byte;
+            if (addr < 0xff00)
+                mem[addr] = byte;
             break;
         }
     }
