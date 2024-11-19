@@ -1,5 +1,5 @@
 rule as
-    command = bin/dasm $in -o$out -l$out.lst -f2 -S
+    command = bin/dasm $in -o$out -f2 -S
     # When option -f2 is enabled, dasm replaces every ORG
     # directive with two uint16's. The first indicates
     # into which the following binary should be loaded,
