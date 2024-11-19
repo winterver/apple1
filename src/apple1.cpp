@@ -101,6 +101,10 @@ public:
             while(true)
             {
                 uint8_t byte = getchar();
+                if (byte == '`') {
+                    m6502_gen_res(&cpu);
+                    continue;
+                }
 #ifndef _WIN32
                 if (byte == 10)
                     byte = 0x0D;
